@@ -132,5 +132,5 @@ Note: If you are having slow performance working with models in Rhino, you can c
   13.	Right click on the Surface from 3 or 4 Corner Points icon to bring up the Surface Creation window.
   14.	Select the Drape icon. Draw the window around an area encompassing your curve(s).
   15. Run Trim in the command line. Select the curve (for multiple curve hold shift and select each curve). Click Enter. Under "Select object to trim:" select an area on the Drape outside your curve. Select Enter. Select Done. This should remove all the surface except for what is captured within your curves.
-  17.	Once the surface is generated, select it and then type Area in the command line. The surface area should appear in the bottom right panel. Copy the value over to an Excel spreadsheet. You can also group all objects of the same type and get a cumulative area, but you lose the individual area values.
-  18.	Repeat steps 9-15 with other target objects, making sure to switch to the correct layer and toggling visibility to see overlapping layers.
+  16.	Once the surface is generated, select it and then type Area in the command line. The surface area should appear in the bottom right panel. Copy the value over to an Excel spreadsheet. You can also group all objects of the same type and get a cumulative area, but you lose the individual area values.
+  17.	Repeat steps 9-15 with other target objects, making sure to switch to the correct layer and toggling visibility to see overlapping layers.
