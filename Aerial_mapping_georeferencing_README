@@ -1,0 +1,102 @@
+Generating Georeferenced Maps from Aerial Photography
+Created by Michael Studivan (mstudiva@fau.edu) and Joshua Voss (jvoss2@fau.edu)
+
+------------------------------
+Aerial Photography
+Note: All photos for a particular map should be taken in the same flight to avoid slight differences in light and ground features.
+1.	Locate the boundaries of the area to be mapped and determine the optimum number of tracks needed to cover the entire area with a single quadcopter flight.
+2.	Record the GPS coordinates of at least four landmarks that will be used to georeference the image in post processing.
+    a.	It is best to use bright colored objects that will stand out from the rest of the background. Blue objects work well on land and yellow objects work well on the water. Avoid using natural landmarks that may move over time.
+3.	Deploy the quadcopter and ascend to a preset altitude. We find that 400ft allows for sufficient ground coverage and sufficient image quality for mapping.
+4.	Orient the camera to 90° facing downwards and maintain the same quadcopter heading.
+5.	Fly a grid pattern over the entire target area (Figure 1), maintaining the same altitude and heading (do not adjust the quadcopter yaw; this requires you to move side-to-side and backwards).
+6.	Take downward-facing photos along the flight, ensuring complete coverage with overlapping features.
+
+------------------------------
+Photomerging
+Note: The Lens Correction Profile is a quadcopter-specific file that determines the level of lens correction needed. Most commonly used quadcopters have lens correction profiles available online for free.
+1.	Download all the photos from the target area (Figure 2) onto a computer and open in Adobe Photoshop (CS6 or higher is preferred). Each photo will display as a separate tab.
+2.	Photos must first be processed to correct lens distortion common on wide-angle quadcopter cameras (Figures 3 and 4). Go to File, Automate, Lens Correction…
+3.	A window will appear with the lens correction options. Select Add Open Files, set the Destination Folder and File Type as JPG.
+4.	Set the Lens Correction Profile, and select OK.
+5.	After all the images are done processing, check the destination folder for the corrected versions.
+6.	Close all existing tabs in Photoshop and then open the corrected images.
+7.	To merge the images into a single photo, go to File, Automate, Photomerge…
+8.	Select Add Open Files, then OK. The photomerging process may take several minutes.
+9.	The finished product will appear as a separate tab. If the process worked completely, you will see a single map. Toggle each layer’s visibility in the Layers window to see what part of each photo was used in the final merge.
+10.	If the area is too large, or contains uniform areas difficult to differentiate from one another, there might be two or more final merges that could not be combined. To fix, try reducing the number of overlapping images, or repeat the photomerging process on the two or more merges.
+11.	Save the merge tab as a JPG (PNGs usually crash Photoshop as they are so large with merged images).
+
+------------------------------
+Figure 1. A target area to be mapped, and the grid pattern used to capture all the downward-facing photos. At each 90° turn, the heading of the quadcopter does not change.
+
+Figure 2. A set of overlapping photos taken during the grid pattern flight. These photos were all taken from an altitude of 400ft.
+
+Figure 3. Downward-facing photo taken with the DJI Phantom Vision 2+ before and after lens correction in Adobe Photoshop.
+
+Figure 4. Planar photo taken with the DJI Phantom Vision 2+ before and after lens correction in Adobe Photoshop.
+
+Figure 5. Downward-facing photos taken of the same target at 100ft and 400ft, respectively. The cutout shows a set area blown up to the same size for image resolution comparison.
+
+------------------------------
+Georeferencing a Photomerged Map
+1.	Create an Excel spreadsheet using the GPS coordinates of notable landmarks. ArcMap is very specific about naming conventions, so label the two columns as “Easting” and “Northing.” Do not use spaces; instead use “_” in both the file name and in the worksheet.
+    a.	Coordinates must be in decimal degrees and their respective cells formatted as Number with at least eight decimal places.
+2.	Open ArcMap 10.x and choose the Blank Map Template. Select Customize, Toolbars, and make sure Georeferencing is checked. If not, selecting it will place the Georeferencing toolbar at the top of ArcMap.
+3.	Select Add Data (yellow diamond with plus sign). Navigate to your working directory and select the photomerged map file. There will likely be warnings stating Unknown Spatial Reference. Ignore these for now and select OK.
+4.	Select Add Data again, and navigate to your Excel file, selecting the particular worksheet with the coordinates.
+5.	Right-click the Excel worksheet in the Table of Contents and select Display XY Data.
+6.	Make sure the X field reads “Easting” and the Y Field reads “Northing.” Select Edit… to change the coordinate system.
+    a.	Expand the Geographic Coordinate Systems folder, then World, and select “WGS 1984.”
+    b.	Select OK at the Display XY Data window and the Object-ID error window.
+7.	An Event will appear above the Excel worksheet in the Table of Contents. Right-click it and select Data, Export Data…
+    a.	Keep the options as-is, but change the name of the output shapefile (.shp) to your preference.
+    b.	Select Yes to add the shapefile to your map as a layer.
+8.	Right-click and Remove the original Excel file layer (or uncheck it to make it invisible).
+9.	Double-click the symbol for the new shapefile in the Table of Contents to change its shape, color, and symbol size to make it more visible.
+10.	To add labels to the GPS coordinates, right-click the shapefile, select Open Attribute Table.
+    a.	Click the Table Options button, select Add Field.
+    b.	Give the field a name like “Object_ID” and change the Type to Text.
+    c.	Go back to the main Arc screen and find the Editor tab at the top toolbar. Select Start Editing, then open the Attribute Table for the shapefile again.
+    d.	Double-click inside the “Object_ID” field for each point to give it a label.
+    e.	When all points are labeled, return to the main screen and right-click the shapefile, select Label Features, and select Properties.
+    f.	Under the Labels tab, change the Label Field to “Object_ID” and select OK.
+    g.	All points should now be properly labeled.
+11.	Make sure the photomerged map is selected in the drop-down menu of the Georeferencing toolbar. Zoom out until all the points are filling half of the screen, the select Fit to Display under the Georeferencing drop-down menu. The map will appear over the GPS points.
+12.	Zoom in to the first landmark in the image and select the Add Control Points button in the toolbar. Click the landmark in the image, then the corresponding GPS point in the shapefile to make the link.
+13.	Continue to add control points until all the landmarks are linked. The map will autorotate to match the shapefile.
+14.	Select the View Link Table to check all the landmark links and the residual error between the shapefile and image links.
+15.	Select Rectify… from the Georeferencing drop-down menu. Leave the Cell Size as is, but change the NoData as to blank. Navigate to your working directory for the Output Location and set a name. Set the Format as TIFF. Select OK.
+16.	The georeferenced TIFF will be saved with several other similarly named filetypes and is now ready for any additional analyses.
+
+------------------------------
+Altitude Considerations
+In the protocol development stage of the photomerging process, we tested the effectiveness of taking downward-facing photos at different altitudes in capturing sufficient resolution for mapping. Recreational drones are altitude-limited to 400ft, therefore we tested a range between 100-400ft. Flights below 100ft for mapping should be avoided to prevent the chance of the quadcopter striking buildings, trees, and utility
+lines. Figure 5 shows two different photos of the same target site taken at 100ft and 400ft, respectively. The zoomed cutout shows the same area in both photos magnified to the same size. While images taken at 100ft give slightly more image resolution and detail, 400ft flights are logistically simpler and require fewer images to capture a larger target area. Consideration for flight altitude should be made depending on the size of the area to be mapped and the resolution required for downstream quantitative analyses. For example, to measure the area covered by salt marsh habitat or seagrass beds, a higher altitude would be sufficient, while a lower flight would be required in order to count individual plants within the above habitats.
+
+------------------------------
+Pitfalls and Limitations
+•	400ft altitude restriction
+•	No-fly zones in state parks
+•	Flight restrictions on federal vessels
+•	Limited flight time
+•	Loss of control and GPS station-holding with high winds
+•	Lithium ion battery management
+•	Two-person crew required
+•	Magnetic interference on vessels
+
+------------------------------
+Best Practices
+•	Dedicate two people to fly (one pilot, one videographer/catcher)
+•	Do not push the battery below 30% to ensure proper recovery
+•	When recording video, move deliberately and slowly
+•	Avoid quadcopter yaw (use camera yaw instead)
+•	Format the onboard SD card before each flight via the DJI GO app
+•	Avoid large changes in camera pitch to avoid lens warping
+•	Take multiple photos and video of the same target
+•	When mapping, take photos of the surrounding area outside the target site as well
+•	Use Attitude mode when there are constant velocity and direction winds for smooth tracking video
+•	Consider hard drive space requirements of 4K video
+•	Record a mix of stationary and moving video for variability in the finished product
+•	If not using the quadcopter for a week or more, discharge the batteries by leaving the quadcopter on without props spinning
+•	Likewise, if preparing to use the quadcopter after a period of non-use, run the batteries for several minutes, then recharge. The LED battery indicators may show 100%, but when flying, the battery level will quickly drop 30-50% in the first minutes of flight.
