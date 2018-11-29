@@ -8,23 +8,24 @@ Note: The quality of the model will greatly depend on the target area. Reefscape
 Aerial Videography
 
 Note: We are using a DJI Inspire 1 with Zenmuse X3 camera as it produces very little lens distortion, shoots in 4K, and has excellent video stabilization.
-  1.	Locate the boundaries of the area to be mapped and determine the optimum number of tracks needed to cover the entire area with a single quadcopter flight.
-  2.	Deploy the quadcopter and ascend to a preset altitude. We find that 400ft allows for sufficient ground coverage and sufficient image quality for mapping.
-  3.	Orient the camera to 90° facing downwards and maintain the same quadcopter heading.
-  4.	Fly a grid pattern over the entire target area (Figure 1), maintaining the same altitude and heading (do not adjust the quadcopter yaw; this requires you to move side-to-side and backwards).
-  5.	Take continuous video along the flight, ensuring complete coverage with overlapping features.
-      a.	If mapping a large area over multiple flights, try to maintain lighting consistency by either flying immediately after the first flight, or flying at the same time of day.
+
+1.	Locate the boundaries of the area to be mapped and determine the optimum number of tracks needed to cover the entire area with a single quadcopter flight.
+2.	Deploy the quadcopter and ascend to a preset altitude. We find that 400ft allows for sufficient ground coverage and sufficient image quality for mapping.
+3.	Orient the camera to 90° facing downwards and maintain the same quadcopter heading.
+4.	Fly a grid pattern over the entire target area (Figure 1), maintaining the same altitude and heading (do not adjust the quadcopter yaw; this requires you to move side-to-side and backwards).
+5.	Take continuous video along the flight, ensuring complete coverage with overlapping features.
+    a.	If mapping a large area over multiple flights, try to maintain lighting consistency by either flying immediately after the first flight, or flying at the same time of day.
 
 ------------------------------
 Reef Videography
 
-  1.	The type of underwater camera should not matter for model generation, however, ensure it shoots in sufficient quality (1080p). If using a GoPro, make sure the field of view is set to narrow, sharpness to medium, frame rate of at least 30 fps, and white balance of 6500K. External lights should not be needed
-      a.	Note: We use a Canon G16 with the underwater mode, shooting at 60 fps. There is very little lens distortion, and it has an excellent sensor for video stabilization.
-  2.	Once you have identified a target area, lay down some kind of scaling reference. You can build a 2 x 2 m PVC quadrat as in Young et al. (2017), or have several individual pieces of the same length PVC arranged in a square shape. It helps to add some kind of tape marker to each piece, such as a 10 cm scaling band.
-  3.	Swim over the target area and scaling references in a lawnmower pattern while recording a single video (Figure 2). The diver should maintain a constant altitude (0.5–1 m off bottom) and relatively slow speed. Keep the camera oriented straight down and do not change the orientation in between adjacent passes.
-      a.	The number of passes depends on the overall size of the target area. For a 2 x 2 m area, six adjacent passes should be sufficient to maintain >50% overlap between passes.
-  4.	At the end of the first set of passes, rotate the camera 90 and complete another set of passes, continuing to record
-  5.	A full set of two passes should take anywhere between 1–3 minutes.
+1.	The type of underwater camera should not matter for model generation, however, ensure it shoots in sufficient quality (1080p). If using a GoPro, make sure the field of view is set to narrow, sharpness to medium, frame rate of at least 30 fps, and white balance of 6500K. External lights should not be needed
+    a.	Note: We use a Canon G16 with the underwater mode, shooting at 60 fps. There is very little lens distortion, and it has an excellent sensor for video stabilization.
+2.	Once you have identified a target area, lay down some kind of scaling reference. You can build a 2 x 2 m PVC quadrat as in Young et al. (2017), or have several individual pieces of the same length PVC arranged in a square shape. It helps to add some kind of tape marker to each piece, such as a 10 cm scaling band.
+3.	Swim over the target area and scaling references in a lawnmower pattern while recording a single video (Figure 2). The diver should maintain a constant altitude (0.5–1 m off bottom) and relatively slow speed. Keep the camera oriented straight down and do not change the orientation in between adjacent passes.
+    a.	The number of passes depends on the overall size of the target area. For a 2 x 2 m area, six adjacent passes should be sufficient to maintain >50% overlap between passes.
+4.	At the end of the first set of passes, rotate the camera 90 and complete another set of passes, continuing to record
+5.	A full set of two passes should take anywhere between 1–3 minutes.
 
 
 ------------------------------
@@ -32,22 +33,18 @@ Video Processing
 
 Note: Dealing with high quality video, hundreds of stills, and high resolution models can require immense storage and computing requirements. I would suggest using a high speed, high capacity external drive for storage and local access. Most networked drives will likely be too slow for model generation and data curation.
 
-  1.	Install FFmpeg on your computer from http://www.ffmpeg.org/download.html. It is available for any OS and they provide several guides for installation.
+1.	Install FFmpeg on your computer from http://www.ffmpeg.org/download.html. It is available for any OS and they provide several guides for installation.
     a.	Personally, I find it easiest to use on a Mac due to the Unix interface already set up in the Terminal app. The subsequent instructions are tailored for a Mac OS.
     b.	You may need additional software to run this on a Windows OS. Something like Cygwin (https://cygwin.com/install.html) should work.
-  2.	Navigate to the directory containing your video.
-
+2.	Navigate to the directory containing your video.
         cd /path/to/video/directory
-
-  3.	To pull still images from the video, use the following code:
-
+3.	To pull still images from the video, use the following code:
         ffmpeg -i movie_filename.MP4 -vf fps=3 output_name_%d.png
-
     a.	-i denotes the input video filename
     b.	-vf deinterlaces the video to produce crisp still images
     c.	fps=3 specifies that 3 frames should be taken per second of video, which should be sufficient to produce images with enough overlap
     d.	Start the output filename as a text string of your choice, and %d inserts a consecutive number to each individual image file.
-  4.	Once the process finishes, you should have 100–500 still images depending on the length of the input video.
+4.	Once the process finishes, you should have 100–500 still images depending on the length of the input video.
 
 ------------------------------
 3D Model Generation
@@ -56,34 +53,35 @@ Note: While both software applications, Photoscan and Rhino 3D, are not free, th
 
 Note: Also, the two software applications, Photoscan and Rhino 3D, require some serious computing power. It is recommended to meet their requirements, and to not attempt additional processing for other tasks while the models are being generated.
 
-  1.	Open Photoscan and select Preferences. Under the GPU tab, make sure any available GPU devices are selected.
-  2.	For High-Throughput, for single model generation skip to Step 7: Before you begin importing photos and generating models, we will create and save several batch processes. Select Workflow > Batch Process. Select Add, select Job type: Align Photos, Apply to: All Chunks. Under settings, the Accuracy Value defaults to High, double click and select Medium. Select OK. Select the box “Save project after each step” name and save your batch process “Batch Align” or a similarly appropriate name.
-  3.	In the same window, select Remove, then select Add, Job Type: Build Dense Cloud, Apply to: All Chunks. The Quality setting should default to Medium, if not, double click and select Medium. Select OK. Select the box “Save project after each step,” name and save your batch process “Batch Dense Cloud” or a similarly appropriate name.
-  4.	In the same window, select Remove, then select Add, Job Type: Build Mesh, Apply to: All Chunks. The Custom face count should be set to 3,000,000 for high accuracy. Select OK.
-  5.	In the same window, Select Add, Job type: Build Texture, Apply to: All Chunks. Select OK. Select the box “Save project after each step,” name and save your batch process “Batch Texture” or a similarly appropriate name.
-    Note: The reasoning behind the three separate batch processes is that there are important QA/QC procedures between the Alignment and Dense Cloud generations.
-  6.	Select the Add Chunk icon in the Workspace Window. Right click on the new Chunk and select Add > Add Photos. Navigate to your working directory and select all of the still images. Once imported, they will show up as a Chunk (set of photos). Rename the Chunk to distinguish this model from subsequent models. Repeat this process for all the remaining models you wish to make. Save the project.
-  7.	For single model generation: Select the Add Photos icon in the Workspace window. Navigate to your working directory and select all of the still images. Once imported, they will show up as a Chunk (set of photos). Save the project.
-  8.	Start the image alignment process by selecting Workflow, Align Photos. Set the Accuracy to Medium. This process may take some time, since it finds common points among the photos.
+1.	Open Photoscan and select Preferences. Under the GPU tab, make sure any available GPU devices are selected.
+2.	For High-Throughput, for single model generation skip to Step 7: Before you begin importing photos and generating models, we will create and save several batch processes. Select Workflow > Batch Process. Select Add, select Job type: Align Photos, Apply to: All Chunks. Under settings, the Accuracy Value defaults to High, double click and select Medium. Select OK. Select the box “Save project after each step” name and save your batch process “Batch Align” or a similarly appropriate name.
+3.	In the same window, select Remove, then select Add, Job Type: Build Dense Cloud, Apply to: All Chunks. The Quality setting should default to Medium, if not, double click and select Medium. Select OK. Select the box “Save project after each step,” name and save your batch process “Batch Dense Cloud” or a similarly appropriate name.
+4.	In the same window, select Remove, then select Add, Job Type: Build Mesh, Apply to: All Chunks. The Custom face count should be set to 3,000,000 for high accuracy. Select OK.
+5.	In the same window, Select Add, Job type: Build Texture, Apply to: All Chunks. Select OK. Select the box “Save project after each step,” name and save your batch process “Batch Texture” or a similarly appropriate name.
+
+Note: The reasoning behind the three separate batch processes is that there are important QA/QC procedures between the Alignment and Dense Cloud generations.
+
+6.	Select the Add Chunk icon in the Workspace Window. Right click on the new Chunk and select Add > Add Photos. Navigate to your working directory and select all of the still images. Once imported, they will show up as a Chunk (set of photos). Rename the Chunk to distinguish this model from subsequent models. Repeat this process for all the remaining models you wish to make. Save the project.
+7.	For single model generation: Select the Add Photos icon in the Workspace window. Navigate to your working directory and select all of the still images. Once imported, they will show up as a Chunk (set of photos). Save the project.
+8.	Start the image alignment process by selecting Workflow, Align Photos. Set the Accuracy to Medium. This process may take some time, since it finds common points among the photos.
     a.	For High-Throughput process: Start the image alignment process by selecting Workflow, Batch Processes. Load the first batch process you made “Batch Align.” Click OK.
-  9.	Check the alignment by looking at the Photos window under View. Each photo will show up as a thumbnail; if it has aligned, you will see a green check mark. You can also check the aligned photo placement in the sparse point cloud in the Model window. Select the Show Cameras icon to see where the program thinks they were taken. The blue camera icons should approximately match the path taken in the original video. Use each of the three colored axes on the model sphere to move in 3 dimensional space, and scroll to zoom in and out.
+9.	Check the alignment by looking at the Photos window under View. Each photo will show up as a thumbnail; if it has aligned, you will see a green check mark. You can also check the aligned photo placement in the sparse point cloud in the Model window. Select the Show Cameras icon to see where the program thinks they were taken. The blue camera icons should approximately match the path taken in the original video. Use each of the three colored axes on the model sphere to move in 3 dimensional space, and scroll to zoom in and out.
     a.	If all the photos aligned correctly, proceed to the next step.
     b.	If some did not align properly, you can select the particular photos and Select Align Photos again.
-  10.	Select Resize Region. Ensure that the Region (the gray box) encompasses the entirety of your model (make sure to check the X, Y, and Z plane). The remaining steps only take into account what is located inside the Region.
+10.	Select Resize Region. Ensure that the Region (the gray box) encompasses the entirety of your model (make sure to check the X, Y, and Z plane). The remaining steps only take into account what is located inside the Region.
     a.	For High-Throughput: Ensure this is done for each Chunk.
-  11.	Once enough photos are aligned, select Build Dense Cloud under Workflow. Set the Quality to Medium and start the process. This step takes the longest, and I would suggest selecting Background, which moves the process to the background and automatically saves the project upon completion.
+11.	Once enough photos are aligned, select Build Dense Cloud under Workflow. Set the Quality to Medium and start the process. This step takes the longest, and I would suggest selecting Background, which moves the process to the background and automatically saves the project upon completion.
     a.	For High-Throughput: Select Workflow, Batch Processes. Load the second batch process you made “Batch Dense Cloud.” Click OK.
-  12.	Once finished, you should have a decent representation of the model features built from many small points.
+12.	Once finished, you should have a decent representation of the model features built from many small points.
     a.	Check all angles of the point cloud, looking for aberrant features (“floaters”), or areas with moving features such as soft corals or trees.
     b.	Since these will not be well represented in the finished model, they should be removed. Position the model so that the problem features are isolated from the other parts of the model (nothing behind the features). Use the Rectangle Selection tool on the toolbar to highlight any offending points, and select the Delete Selection tool on the toolbar.
     c.	Don’t worry if this creates small gaps, as they will be filled in when the mesh is made. You do, however, have to remove all the problem features at this stage, otherwise you will have holes in your mesh.
-  13.	Start the Build Mesh process from the Workflow menu. Change the Face Count to 3,000,000 for high accuracy. This process is much shorter, but still can take 5–10 minutes.
+13.	Start the Build Mesh process from the Workflow menu. Change the Face Count to 3,000,000 for high accuracy. This process is much shorter, but still can take 5–10 minutes.
     a.	For High-Throughput: Select Workflow, Batch Processes. Load the second batch process you made called “Batch Texture.” Click OK. (This batch process combines steps 13 and 14, which are relatively quick, use the QA/QC procedures below and rerun as normal if needed.)
     b.	Now you should have a smoothed version of the point cloud. Check for any lingering problem features.
     c.	If anything is found, switch back to the Dense Point Cloud using the button on the toolbar, remove them as described above, and regenerate the mesh.
-  14.	Start the Build Texture process from the Workflow menu, which may take another 5–10 minutes. Once completed, the photo texture will be mapped to the 3D model.
-  15.	Export the model by selecting File, Export, Export Model. Save it as a Wavefront OBJ (.obj) file. Make sure that Export Texture is selected in the following window.
-
+14.	Start the Build Texture process from the Workflow menu, which may take another 5–10 minutes. Once completed, the photo texture will be mapped to the 3D model.
+15.	Export the model by selecting File, Export, Export Model. Save it as a Wavefront OBJ (.obj) file. Make sure that Export Texture is selected in the following window.
 
 ------------------------------
 3D Model Scaling and Analysis
@@ -92,14 +90,13 @@ Note: This protocol in based on Grace Young’s protocols on texture troubleshoo
 
 Note: If you are having slow performance working with models in Rhino, you can change the view from quad to single on the top toolbar. Working in quad may also cause texture rendering problems on large or complex models. But, you can of course switch back and forth between views as necessary for the analyses.
 
-
-  1.	Open the .obj file using Rhino 3D and save as a project file .3dm (with Save Textures checked).
-  2.	The texture created by Photoscan should automatically appear on the mesh (model).
+1.	Open the .obj file using Rhino 3D and save as a project file .3dm (with Save Textures checked).
+2.	The texture created by Photoscan should automatically appear on the mesh (model).
     a.	If it does not, first right click in each of the 4 windows and make sure Rendered view is selected.
     b.	No luck still? Select the mesh (will appear yellow when selected), then select the Object Properties pane on the right (hollow circle symbol on Mac). Remap the texture under Material, Edit, Textures, and select Color. The map file can be relocated by selecting the dropdown next to Map File.
-  3.	In the top right panel, there should be a list of layers. Rename the Default to something like Base or Mesh. Right click to add new layers, one each for Scale, Coral, Disease. As you are working with the respective objects, select the appropriate layer to assign the objects. You can then toggle the layer visibility using the light bulb icon.
-  4.	The first steps are to scale the model from a feature of known measure and to orient the model in 3D space. These objects should be placed in each area that is to be modeled, and can be any reasonable object that is highly differentiated from the surrounding environment (we use PVC segments and cattle tags, but quadrats will also work).
-  5.	The next step is to scale the model. Since our tracked colonies are all uniquely identified with cattle tags placed as close to the live coral tissue as possible, we use the tag dimensions to scale the model.
+3.	In the top right panel, there should be a list of layers. Rename the Default to something like Base or Mesh. Right click to add new layers, one each for Scale, Coral, Disease. As you are working with the respective objects, select the appropriate layer to assign the objects. You can then toggle the layer visibility using the light bulb icon.
+4.	The first steps are to scale the model from a feature of known measure and to orient the model in 3D space. These objects should be placed in each area that is to be modeled, and can be any reasonable object that is highly differentiated from the surrounding environment (we use PVC segments and cattle tags, but quadrats will also work).
+5.	The next step is to scale the model. Since our tracked colonies are all uniquely identified with cattle tags placed as close to the live coral tissue as possible, we use the tag dimensions to scale the model.
     a.	You can also use the tape markers on the PVC boundaries, but we have found that there may be some vertical artifacts in 3D model creation.
     b.	Based off average measurements from 5 cattle tags, we have: width 64.34 mm, length 98.23 mm, diagonal 61.50 mm
     c.	Add points to the sides of the scale object based on your dimension of choice (we use cattle tag width) by typing Points into the command line. Make sure On Mesh is selected in the Object Snaps panel. Enter when done.
@@ -111,9 +108,9 @@ Note: If you are having slow performance working with models in Rhino, you can c
     i.	Change the units by selecting File, Settings, Units, and set the Model Units to meters. When prompted, select Yes to rescale the model.
     j.	Change the grid by selecting File, Settings, Grid, and set the Grid Line Count to 20 and the Minor Grid Lines Every 0.1m.
     k.	Reframe the model using View, Zoom, Zoom Extents All.
-  6.	Check the area of the whole model by selecting all, then typing Area into the command line. The full area will be displayed in m2.
-  7.	You can make the scale arrows and text smaller by selecting File, Settings, Dimensions, Sizes (Text height: 0.1) and Arrows (Dimension arrows Length: 0.1).
-  8.	To align the model on the X-Y plane:
+6.	Check the area of the whole model by selecting all, then typing Area into the command line. The full area will be displayed in m2.
+7.	You can make the scale arrows and text smaller by selecting File, Settings, Dimensions, Sizes (Text height: 0.1) and Arrows (Dimension arrows Length: 0.1).
+8.	To align the model on the X-Y plane:
     a.	Get the model in the full viewframe by selecting View, Zoom, Zoom Extents All.
     b.	Make sure the Object Snap menu is always visible (defaults to bottom left panel on Mac). If it’s not already there, select Tools, Object Snap, Show Object Snaps Panel.
     c.	Type Points in the command prompt (top left panel), and select Persistent and On Mesh in the Object Snaps panel.
@@ -125,12 +122,12 @@ Note: If you are having slow performance working with models in Rhino, you can c
     i.	Once you find the correct point, select it. Select the Move To location by finding the X-Y origin. Make sure Grid Snap is selected in the top toolbar and zooming helps. Select the origin and the model should automatically align the point.
     j.	In the Top view, enter the command Rotate, then select the grouped mesh and Enter. Select the center of rotation (point at origin), then select the angle or first reference point (another point you want on the x-axis). Enter, then it will ask for the second reference point. Make sure Ortho is selected on the top toolbar, then rotate the model so the second point rests on the x-axis.
     k.	Switch to Front or Right views and repeat step j to align to the y-axis. The resulting points should be on the x and y-axes, with the model relatively aligned.
-  9.	Now it’s time to start creating objects for the living coral tissue and disease lesions. Start by switching to the appropriate layer.
-  10.	Create a polygon using the Polyline icon in the top left panel and make sure On Mesh is checked. Select the base mesh, then begin drawing the polyline around the target object.
-  11.	Once finished, connect the ending and starting points. Having Persistent Close checked in the top left panel makes sure the object is fully closed.
-  12.	The object (called a curve) will be used to create a surface to measure area, but since it is on the mesh, cannot be used for calculations by itself.
-  13.	Right click on the Surface from 3 or 4 Corner Points icon to bring up the Surface Creation window.
-  14.	Select the Drape icon. Draw the window around an area encompassing your curve(s).
-  15. Run Trim in the command line. Select the curve (for multiple curve hold shift and select each curve). Click Enter. Under "Select object to trim:" select an area on the Drape outside your curve. Select Enter. Select Done. This should remove all the surface except for what is captured within your curves.
-  16.	Once the surface is generated, select it and then type Area in the command line. The surface area should appear in the bottom right panel. Copy the value over to an Excel spreadsheet. You can also group all objects of the same type and get a cumulative area, but you lose the individual area values.
-  17.	Repeat steps 9-15 with other target objects, making sure to switch to the correct layer and toggling visibility to see overlapping layers.
+9.	Now it’s time to start creating objects for the living coral tissue and disease lesions. Start by switching to the appropriate layer.
+10.	Create a polygon using the Polyline icon in the top left panel and make sure On Mesh is checked. Select the base mesh, then begin drawing the polyline around the target object.
+11.	Once finished, connect the ending and starting points. Having Persistent Close checked in the top left panel makes sure the object is fully closed.
+12.	The object (called a curve) will be used to create a surface to measure area, but since it is on the mesh, cannot be used for calculations by itself.
+13.	Right click on the Surface from 3 or 4 Corner Points icon to bring up the Surface Creation window.
+14.	Select the Drape icon. Draw the window around an area encompassing your curve(s).
+15. Run Trim in the command line. Select the curve (for multiple curve hold shift and select each curve). Click Enter. Under "Select object to trim:" select an area on the Drape outside your curve. Select Enter. Select Done. This should remove all the surface except for what is captured within your curves.
+16.	Once the surface is generated, select it and then type Area in the command line. The surface area should appear in the bottom right panel. Copy the value over to an Excel spreadsheet. You can also group all objects of the same type and get a cumulative area, but you lose the individual area values.
+17.	Repeat steps 9-15 with other target objects, making sure to switch to the correct layer and toggling visibility to see overlapping layers.

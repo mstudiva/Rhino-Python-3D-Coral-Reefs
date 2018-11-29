@@ -11,6 +11,24 @@ Note: All photos for a particular map should be taken in the same flight to avoi
 4.	Orient the camera to 90° facing downwards and maintain the same quadcopter heading.
 5.	Fly a grid pattern over the entire target area (Figure 1), maintaining the same altitude and heading (do not adjust the quadcopter yaw; this requires you to move side-to-side and backwards).
 6.	Take downward-facing photos along the flight, ensuring complete coverage with overlapping features.
+    a. Alternatively, take continuous video along the entire flight path (see Video Processing below).
+
+------------------------------
+Video Processing
+
+Note: Follow the steps in Video Processing only if you recorded video rather than photos.
+
+1.	Install FFmpeg on your computer from http://www.ffmpeg.org/download.html. It is available for any OS and they provide several guides for installation.
+    a.	Personally, I find it easiest to use on a Mac due to the Unix interface already set up in the Terminal app. The subsequent instructions are tailored for a Mac OS.
+    b.	You may need additional software to run this on a Windows OS. Something like Cygwin (https://cygwin.com/install.html) should work.
+2.	Navigate to the directory containing your video.
+        cd /path/to/video/directory
+3.	To pull still images from the video, use the following code:
+        ffmpeg -i movie_filename.MP4 -vf fps=1 output_name_%d.png
+    a.	-i denotes the input video filename
+    b.	-vf deinterlaces the video to produce crisp still images
+    c.	fps=1 specifies that 1 frame should be taken per second of video, which should be sufficient to produce images with enough overlap
+    d. 	Start the output filename as a text string of your choice, and %d inserts a consecutive number to each individual image file.
 
 ------------------------------
 Photomerging
@@ -25,23 +43,24 @@ Note: The Lens Correction Profile is a quadcopter-specific file that determines 
 8.	Select Add Open Files, then OK. The photomerging process may take several minutes.
 9.	The finished product will appear as a separate tab. If the process worked completely, you will see a single map. Toggle each layer’s visibility in the Layers window to see what part of each photo was used in the final merge.
 10.	If the area is too large, or contains uniform areas difficult to differentiate from one another, there might be two or more final merges that could not be combined. To fix, try reducing the number of overlapping images, or repeat the photomerging process on the two or more merges.
-11.	Save the merge tab as a JPG (PNGs usually crash Photoshop as they are so large with merged images).
+11.	Save the merge tab as a TIFF.
 
 ------------------------------
 Figure 1. A target area to be mapped, and the grid pattern used to capture all the downward-facing photos. At each 90° turn, the heading of the quadcopter does not change.
 
-Figure 2. A set of overlapping photos taken during the grid pattern flight. These photos were all taken from an altitude of 400ft.
+Figure 3. A set of overlapping photos taken during the grid pattern flight. These photos were all taken from an altitude of 400ft.
 
-Figure 3. Downward-facing photo taken with the DJI Phantom Vision 2+ before and after lens correction in Adobe Photoshop.
+Figure 4. Downward-facing photo taken with the DJI Phantom Vision 2+ before and after lens correction in Adobe Photoshop.
 
-Figure 4. Planar photo taken with the DJI Phantom Vision 2+ before and after lens correction in Adobe Photoshop.
+Figure 5. Planar photo taken with the DJI Phantom Vision 2+ before and after lens correction in Adobe Photoshop.
 
-Figure 5. Downward-facing photos taken of the same target at 100ft and 400ft, respectively. The cutout shows a set area blown up to the same size for image resolution comparison.
+Figure 6. Downward-facing photos taken of the same target at 100ft and 400ft, respectively. The cutout shows a set area blown up to the same size for image resolution comparison.
 
 ------------------------------
 Georeferencing a Photomerged Map
 1.	Create an Excel spreadsheet using the GPS coordinates of notable landmarks. ArcMap is very specific about naming conventions, so label the two columns as “Easting” and “Northing.” Do not use spaces; instead use “_” in both the file name and in the worksheet.
     a.	Coordinates must be in decimal degrees and their respective cells formatted as Number with at least eight decimal places.
+    b.  If your coordinates are not in DD, there are several Excel tutorials online that show you have to convert between DMS, DDM, and DD.
 2.	Open ArcMap 10.x and choose the Blank Map Template. Select Customize, Toolbars, and make sure Georeferencing is checked. If not, selecting it will place the Georeferencing toolbar at the top of ArcMap.
 3.	Select Add Data (yellow diamond with plus sign). Navigate to your working directory and select the photomerged map file. There will likely be warnings stating Unknown Spatial Reference. Ignore these for now and select OK.
 4.	Select Add Data again, and navigate to your Excel file, selecting the particular worksheet with the coordinates.
@@ -71,8 +90,7 @@ Georeferencing a Photomerged Map
 
 ------------------------------
 Altitude Considerations
-In the protocol development stage of the photomerging process, we tested the effectiveness of taking downward-facing photos at different altitudes in capturing sufficient resolution for mapping. Recreational drones are altitude-limited to 400ft, therefore we tested a range between 100-400ft. Flights below 100ft for mapping should be avoided to prevent the chance of the quadcopter striking buildings, trees, and utility
-lines. Figure 5 shows two different photos of the same target site taken at 100ft and 400ft, respectively. The zoomed cutout shows the same area in both photos magnified to the same size. While images taken at 100ft give slightly more image resolution and detail, 400ft flights are logistically simpler and require fewer images to capture a larger target area. Consideration for flight altitude should be made depending on the size of the area to be mapped and the resolution required for downstream quantitative analyses. For example, to measure the area covered by salt marsh habitat or seagrass beds, a higher altitude would be sufficient, while a lower flight would be required in order to count individual plants within the above habitats.
+In the protocol development stage of the photomerging process, we tested the effectiveness of taking downward-facing photos at different altitudes in capturing sufficient resolution for mapping. Recreational drones are altitude-limited to 400ft, therefore we tested a range between 100-400ft. Flights below 100ft for mapping should be avoided to prevent the chance of the quadcopter striking buildings, trees, and utility lines. Figure 5 shows two different photos of the same target site taken at 100ft and 400ft, respectively. The zoomed cutout shows the same area in both photos magnified to the same size. While images taken at 100ft give slightly more image resolution and detail, 400ft flights are logistically simpler and require fewer images to capture a larger target area. Consideration for flight altitude should be made depending on the size of the area to be mapped and the resolution required for downstream quantitative analyses. For example, to measure the area covered by salt marsh habitat or seagrass beds, a higher altitude would be sufficient, while a lower flight would be required in order to count individual plants within the same habitats.
 
 ------------------------------
 Pitfalls and Limitations
@@ -80,7 +98,7 @@ Pitfalls and Limitations
 •	No-fly zones in state parks
 •	Flight restrictions on federal vessels
 •	Limited flight time
-•	Loss of control and GPS station-holding with high winds
+•	Loss of control and GPS station-holding with high winds (>20mph)
 •	Lithium ion battery management
 •	Two-person crew required
 •	Magnetic interference on vessels
@@ -91,7 +109,7 @@ Best Practices
 •	Do not push the battery below 30% to ensure proper recovery
 •	When recording video, move deliberately and slowly
 •	Avoid quadcopter yaw (use camera yaw instead)
-•	Format the onboard SD card before each flight via the DJI GO app
+•	Format the onboard SD card before each recording session via the DJI GO app
 •	Avoid large changes in camera pitch to avoid lens warping
 •	Take multiple photos and video of the same target
 •	When mapping, take photos of the surrounding area outside the target site as well
