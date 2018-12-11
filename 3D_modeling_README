@@ -112,22 +112,23 @@ Note: If you are having slow performance working with models in Rhino, you can c
 7.	You can make the scale arrows and text smaller by selecting File, Settings, Dimensions, Sizes (Text height: 0.1) and Arrows (Dimension arrows Length: 0.1).
 8.	To align the model on the X-Y plane:
     a.	Get the model in the full viewframe by selecting View, Zoom, Zoom Extents All.
-    b.	Make sure the Object Snap menu is always visible (defaults to bottom left panel on Mac). If it’s not already there, select Tools, Object Snap, Show Object Snaps Panel.
-    c.	Type Points in the command prompt (top left panel), and select Persistent and On Mesh in the Object Snaps panel.
-    d.	Select the polygon mesh by clicking once on the mesh.
-    e.	The pointer should change to a crosshair. Add 3 points to PVC corners (outer boundaries of the quadrat or PVC markers). Hit Enter when done adding points.
-    f.	Select all (Cmd+A) then type Group into the command line. Enter to group.
-    g.	Type Move in the command line then Enter. Select the mesh (if not already selected) then Enter.
-    h.	Select Point on the Object Snaps panel. It will be hard to find the center point (what you want to be at the origin) with the selected mesh, but you can move the mouse in the selected area when zoomed in.
-    i.	Once you find the correct point, select it. Select the Move To location by finding the X-Y origin. Make sure Grid Snap is selected in the top toolbar and zooming helps. Select the origin and the model should automatically align the point.
-    j.	In the Top view, enter the command Rotate, then select the grouped mesh and Enter. Select the center of rotation (point at origin), then select the angle or first reference point (another point you want on the x-axis). Enter, then it will ask for the second reference point. Make sure Ortho is selected on the top toolbar, then rotate the model so the second point rests on the x-axis.
-    k.	Switch to Front or Right views and repeat step j to align to the y-axis. The resulting points should be on the x and y-axes, with the model relatively aligned.
+    b.  Right click the mesh and set the view to Technical (easier to see points).
+    c.	Make sure the Object Snap menu is always visible (defaults to bottom left panel on Mac). If it’s not already there, select Tools, Object Snap, Show Object Snaps Panel.
+    d.	Type Points in the command prompt (top left panel), and select Persistent and On Mesh in the Object Snaps panel.
+    e.	Select the polygon mesh by clicking once on the mesh.
+    f.	The pointer should change to a crosshair. Add 3 points to PVC corners (outer boundaries of the quadrat or PVC markers). Hit Enter when done adding points.
+    g.	Select all (Cmd+A) then type Group into the command line. Enter to group.
+    h.	Type Move in the command line then Enter. Select the mesh (if not already selected) then Enter.
+    i.	Select Point on the Object Snaps panel. It will be hard to find the center point (what you want to be at the origin) with the selected mesh, but you can move the mouse in the selected area when zoomed in.
+    j.	Once you find the correct point, select it. Select the Move To location by finding the X-Y origin. Make sure Grid Snap is selected in the top toolbar and zooming helps. Select the origin and the model should automatically align the point.
+    k.	In the Top view, enter the command Rotate, then select the grouped mesh and Enter. Select the center of rotation (point at origin), then select the angle or first reference point (another point you want on the x-axis). Enter, then it will ask for the second reference point. Make sure Ortho is selected on the top toolbar, then rotate the model so the second point rests on the x-axis.
+    l.	Switch to Front or Right views and repeat step j twice to align to the x- and y-axes. The resulting points should be on the x and y-axes, with the model relatively aligned.
 9.	Now it’s time to start creating objects for the living coral tissue and disease lesions. Start by switching to the appropriate layer.
-10.	Create a polygon using the Polyline icon in the top left panel and make sure On Mesh is checked. Select the base mesh, then begin drawing the polyline around the target object.
-11.	Once finished, connect the ending and starting points. Having Persistent Close checked in the top left panel makes sure the object is fully closed.
+10.	Create a polygon using the PolylineOnMesh icon in the top left panel. Select the base mesh, then begin drawing the polyline around the target object.
+11.	Once finished, connect the ending and starting points.
 12.	The object (called a curve) will be used to create a surface to measure area, but since it is on the mesh, cannot be used for calculations by itself.
 13.	Right click on the Surface from 3 or 4 Corner Points icon to bring up the Surface Creation window.
 14.	Select the Drape icon. Draw the window around an area encompassing your curve(s).
-15. Run Trim in the command line. Select the curve (for multiple curve hold shift and select each curve). Click Enter. Under "Select object to trim:" select an area on the Drape outside your curve. Select Enter. Select Done. This should remove all the surface except for what is captured within your curves.
+15. Run Trim in the command line. Select the curve(s). Enter or select Done. Under "Select object to trim:" select an area on the Drape outside your curve. Enter or select Done. This should remove all the surface except for what is captured within your curves.
 16.	Once the surface is generated, select it and then type Area in the command line. The surface area should appear in the bottom right panel. Copy the value over to an Excel spreadsheet. You can also group all objects of the same type and get a cumulative area, but you lose the individual area values.
 17.	Repeat steps 9-15 with other target objects, making sure to switch to the correct layer and toggling visibility to see overlapping layers.
