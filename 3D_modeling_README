@@ -22,6 +22,7 @@ Reef Videography
 1.	The type of underwater camera should not matter for model generation, however, ensure it shoots in sufficient quality (1080p). If using a GoPro, make sure the field of view is set to narrow, sharpness to medium, frame rate of at least 30 fps, and white balance of 6500K. External lights should not be needed
     a.	Note: We use a Canon G16 with the underwater mode, shooting at 60 fps. There is very little lens distortion, and it has an excellent sensor for video stabilization.
 2.	Once you have identified a target area, lay down some kind of scaling reference. You can build a 2 x 2 m PVC quadrat as in Young et al. (2017), or have several individual pieces of the same length PVC arranged in a square shape. It helps to add some kind of tape marker to each piece, such as a 10 cm scaling band.
+    b. Note: We use two scaled PVC "L" frames with a 10 cm marking on either end
 3.	Swim over the target area and scaling references in a lawnmower pattern while recording a single video (Figure 2). The diver should maintain a constant altitude (0.5–1 m off bottom) and relatively slow speed. Keep the camera oriented straight down and do not change the orientation in between adjacent passes.
     a.	The number of passes depends on the overall size of the target area. For a 2 x 2 m area, six adjacent passes should be sufficient to maintain >50% overlap between passes.
 4.	At the end of the first set of passes, rotate the camera 90 and complete another set of passes, continuing to record
@@ -95,16 +96,15 @@ Note: If you are having slow performance working with models in Rhino, you can c
     a.	If it does not, first right click in each of the 4 windows and make sure Rendered view is selected.
     b.	No luck still? Select the mesh (will appear yellow when selected), then select the Object Properties pane on the right (hollow circle symbol on Mac). Remap the texture under Material, Edit, Textures, and select Color. The map file can be relocated by selecting the dropdown next to Map File.
 3.	In the top right panel, there should be a list of layers. Rename the Default to something like Base or Mesh. Right click to add new layers, one each for Scale, Coral, Disease. As you are working with the respective objects, select the appropriate layer to assign the objects. You can then toggle the layer visibility using the light bulb icon.
-4.	The first steps are to scale the model from a feature of known measure and to orient the model in 3D space. These objects should be placed in each area that is to be modeled, and can be any reasonable object that is highly differentiated from the surrounding environment (we use PVC segments and cattle tags, but quadrats will also work).
-5.	The next step is to scale the model. Since our tracked colonies are all uniquely identified with cattle tags placed as close to the live coral tissue as possible, we use the tag dimensions to scale the model.
-    a.	You can also use the tape markers on the PVC boundaries, but we have found that there may be some vertical artifacts in 3D model creation.
-    b.	Based off average measurements from 5 cattle tags, we have: width 64.34 mm, length 98.23 mm, diagonal 61.50 mm
-    c.	Add points to the sides of the scale object based on your dimension of choice (we use cattle tag width) by typing Points into the command line. Make sure On Mesh is selected in the Object Snaps panel. Enter when done.
+4.	The first steps are to scale the model from a feature of known measure and to orient the model in 3D space. These objects should be placed in each area that is to be modeled, and can be any reasonable object that is highly differentiated from the surrounding environment (we use PVC segments).
+5.	The next step is to scale the model. Our tracked colonies are all uniquely identified with cattle tags, however we have found that using scaled PVC "L" frames with 10 cm markings work best to scale the model.
+    a.	You can also use the cattle tags, however there may be slight distortion of the cattle tags based on where they are placed on the colony.
+    b.	Add points to the sides of the scale object based on your dimension of choice (we use 10 cm marking on our PVC frames) by typing Points into the command line. Make sure On Mesh is selected in the Object Snaps panel. Enter when done.
     d.	Run DimAligned in the command line. Make sure Point is selected in the Object Snaps panel and select each of the two scale points. Once entered, an arbitrary length should appear. Drag the scale bar with number outside the model boundaries and left click to release.
     e.	Select File, Settings, Dimensions, and set the Precision to the highest number of decimal points.
     f.	Select all (Cmd+A) and run Group in the command line.
     g.	Run Scale in the command line, select the mesh group (if not already selected), then select one of the scale points.
-    h.	When prompted for the scaling factor in the top left panel, enter the known dimension divided by the arbitrary scaling length from step d (e.g. 64.34/2.1320067).
+    h.	When prompted for the scaling factor in the top left panel, enter the known dimension divided by the arbitrary scaling length from step d (e.g. 100/2.1320067).
     i.	Change the units by selecting File, Settings, Units, and set the Model Units to meters. When prompted, select Yes to rescale the model.
     j.	Change the grid by selecting File, Settings, Grid, and set the Grid Line Count to 20 and the Minor Grid Lines Every 0.1m.
     k.	Reframe the model using View, Zoom, Zoom Extents All.
