@@ -1,6 +1,6 @@
 Generating 3D Models from Downward-Facing Aerial/Reef Videos
 Modified from Young et al. 2017 by Michael Studivan (mstudiva@fau.edu)
-
+Last Updated: Ian Combs 12/10/19
 Note: The protocol is slightly different for aerial or reef videos, but the overall workflow is the same. Start with the appropriate subsection below depending on the application.
 Note: The quality of the model will greatly depend on the target area. Reefscapes with high densities of moving organisms, such as fish and soft corals, will prevent good alignment of points across photos. Likewise, aerial videos over large areas may result in variability due to trees or birds moving. In highly variable areas, it is suggested to reduce the size of the video area and make sure your target of interest (corals, buildings, etc.) are not too close to moving objects.
 
