@@ -32,6 +32,8 @@ Reef Videography
 ------------------------------
 Video Processing
 
+Below is the protocol for extracting one round of stills from one model, included in this repository is a python script (ffmpeg.py) that will batch extract videos using Ffmpeg. 
+
 Note: Dealing with high quality video, hundreds of stills, and high resolution models can require immense storage and computing requirements. I would suggest using a high speed, high capacity external drive for storage and local access. Most networked drives will likely be too slow for model generation and data curation.
 
 1.	Install FFmpeg on your computer from http://www.ffmpeg.org/download.html. It is available for any OS and they provide several guides for installation.
@@ -50,11 +52,11 @@ Note: Dealing with high quality video, hundreds of stills, and high resolution m
 ------------------------------
 3D Model Generation
 
-Note: While both software applications, Photoscan and Rhino 3D, are not free, they offer educational licenses that are relatively affordable. Additionally, older versions of Netfabb are available for free on Windows and Mac OS (https://github.com/3DprintFIT/netfabb-basic-download/releases/tag/v7.4.0). Netfabb is less performance-intensive, but I have not figured out an easy way to scale the models and quantify area of user-specified polygons.
+Note: While both software applications, Metashape and Rhino 3D, are not free, they offer educational licenses that are relatively affordable. Additionally, older versions of Netfabb are available for free on Windows and Mac OS (https://github.com/3DprintFIT/netfabb-basic-download/releases/tag/v7.4.0). Netfabb is less performance-intensive, but I have not figured out an easy way to scale the models and quantify area of user-specified polygons.
 
-Note: Also, the two software applications, Photoscan and Rhino 3D, require some serious computing power. It is recommended to meet their requirements, and to not attempt additional processing for other tasks while the models are being generated.
+Note: Also, the two software applications, Metashape and Rhino 3D, require some serious computing power. It is recommended to meet their requirements, and to not attempt additional processing for other tasks while the models are being generated.
 
-1.	Open Photoscan and select Preferences. Under the GPU tab, make sure any available GPU devices are selected.
+1.	Open Metashape and select Preferences. Under the GPU tab, make sure any available GPU devices are selected.
 2.	The next steps are for High-Throughput, for single model generation skip to Step 7: Before you begin importing photos and generating models, we will create and save several batch processes. Select Workflow > Batch Process. Select Add, select Job type: Align Photos, Apply to: All Chunks. Under settings, the Accuracy Value defaults to High, double click and select Medium. Select OK. Select the box “Save project after each step” name and save your batch process “Batch Align” or a similarly appropriate name.
 3.	In the same window, select Remove, then select Add, Job Type: Build Dense Cloud, Apply to: All Chunks. The Quality setting should default to Medium, if not, double click and select Medium. Select OK. Select the box “Save project after each step,” name and save your batch process “Batch Dense Cloud” or a similarly appropriate name.
 4.	In the same window, select Remove, then select Add, Job Type: Build Mesh, Apply to: All Chunks. The Custom face count should be set to 3,000,000 for high accuracy. Select OK.
@@ -92,7 +94,7 @@ Note: This protocol in based on Grace Young’s protocols on texture troubleshoo
 Note: If you are having slow performance working with models in Rhino, you can change the view from quad to single on the top toolbar. Working in quad may also cause texture rendering problems on large or complex models. But, you can of course switch back and forth between views as necessary for the analyses.
 
 1.	Open the .obj file using Rhino 3D and save as a project file .3dm (with Save Textures checked).
-2.	The texture created by Photoscan should automatically appear on the mesh (model).
+2.	The texture created by Metashape should automatically appear on the mesh (model).
     a.	If it does not, first right click in each of the 4 windows and make sure Rendered view is selected.
     b.	No luck still? Select the mesh (will appear yellow when selected), then select the Object Properties pane on the right (hollow circle symbol on Mac). Remap the texture under Material, Edit, Textures, and select Color. The map file can be relocated by selecting the dropdown next to Map File.
 3.	In the top right panel, there should be a list of layers. Rename the Default to something like Base or Mesh. Right click to add new layers, one each for Scale, Coral, Disease. As you are working with the respective objects, select the appropriate layer to assign the objects. You can then toggle the layer visibility using the light bulb icon.
